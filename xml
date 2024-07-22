@@ -1,0 +1,83 @@
+<?xml version="l .O" encoding="UTF-8"?>
+<bookstore>
+<book isbn="978-3-16-148410-0">
+<title>Effective Java</title>
+<author>Joshua Bloch</author>
+<price>45.0</price>
+</book>
+<book isbn="978-0-596-52068-7">
+<title>Head First Java</title>
+<author>Kathy Sierra</author>
+<price>30.0</price>
+</book>
+</bookstore>
+
+
+<!DOCTYPE bookstore [
+<!ELEMENT bookstore (book+)>
+<!ELEMENT book (title, author, price)>
+<!ATTLIST book
+isbn CDATA #REQUIRED
+>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT author (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+]>
+
+
+
+<?xml version="l .O" encoding="UTF-8"?>
+<!DOCTYPE bookstore SYSTEM "bookstore.dtd">
+<bookstore>
+<book isbn="978-3-16-148410-0">
+<title>Effective Java</title>
+<author>Joshua Bloch</author>
+<price>45.0</price>
+</book>
+<book isbn="978-0-596-52068-7">
+<title>Head First Java</title>
+<author>Kathy Sierra</author>
+<price>30.0</price>
+</book>
+</bookstore>
+
+
+<?xml version="l .O" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="bookstore">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="book" minOccurs=" I" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="title" type="xs:string"/>
+<xs:element name="author" type="xs:string"/>
+<xs:element name="price" type="xs:float"/>
+</xs:sequence>
+<xs:attribute name="isbn" type="xs:string" use="required"/>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+
+</xs:complexType>
+</xs:element>
+</xs:schema>
+
+This XSD schema specifies:
+
+<bookstore> contains one or more <book> elements.
+<book> has isbn as a required attribute and contains <title>, <author>, and <price>. The data types are explicitly defined (string, float).
+To validate the XML with this XSD, add a reference to it in the XML file:
+<?xml version="l .0" encoding="UTF-8"?>
+<bookstore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="bookstore.xsd">
+<book isbn="978-3-16-148410-0">
+<title>Effective Java</title>
+<author>Joshua Bloch</author>
+<price>45.0</price>
+</book>
+<book isbn="978-0-596-52068-7">
+<title>Head First Java</title>
+<author>Kathy Sierra</author>
+<price>30.0</price>
+</book>
+</bookstore>
