@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto Copy GitHub Content</title>
+    <title>GitHub Code Copier</title>
 </head>
 <body>
-    <script>
-        window.onload = function() {
-            const url = 'https://raw.githubusercontent.com/Kiara22N/sdc/refs/heads/main/dijakstra.c';
+    <div class="container">
+        <button class="copy-btn" onclick="copyCode('https://raw.githubusercontent.com/Kiara22N/sdc/refs/heads/main/dijakstra.c')">dijasktra</button><br><br>
+    </div>
 
-            fetch(url)
-                .then(response => response.text())
-                .then(text => {
-                    const tempElement = document.createElement('textarea');
-                    tempElement.value = text;
-                    document.body.appendChild(tempElement);
-                    tempElement.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(tempElement);
-                    alert('Content copied to clipboard!');
-                })
-                .catch(err => {
-                    console.error('Failed to fetch the content: ', err);
-                });
+    <script>
+        async function copyCode(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const code = await response.text();
+                await navigator.clipboard.writeText(code);
+                alert('Code copied to clipboard!');
+            } catch (error) {
+                console.error('Failed to copy code: ', error);
+                alert('Failed to copy code.');
+            }
         }
     </script>
 </body>
