@@ -1,53 +1,143 @@
-include<stdio.h> void main()
+import 'package:flutter/material.dart';
 
-{
 
-int path[5][5],i,j,min,a[5][5],p,st=1,ed=5,stp,edp,t[5],index; printf("Enter the cost matrix\n");
 
-for(i=1;i<=5;i++) for(j=1;j<=5;j++)
+void main() => runApp(MyApp());
 
-scanf("%d",&a[i][j]); printf("Enter the paths\n"); scanf("%d",&p);
 
-printf("Enter possible paths\n"); for(i=1;i<=p;i++) for(j=1;j<=5;j++) scanf("%d",&path[i][j]); for(i=1;i<=p;i++)
 
-{ t[i]=0;
+class MyApp extends StatelessWidget {
 
-stp=st; for(j=1;j<=5;j++)
+  @override
 
-{
+  Widget build(BuildContext context) {
 
-edp=path[i][j+1]; t[i]=t[i]+a[stp][edp]; if(edp==ed)
+    return MaterialApp(
 
-break; else stp=edp;
+      home: CombinedWidget(),
 
-}
+    );
+
+  }
 
 }
 
-min=t[st];index=st; for(i=1;i<=p;i++)
 
-{
 
-if(min>t[i])
+class CombinedWidget extends StatelessWidget {
 
-{
+  @override
 
-min=t[i];
+  Widget build(BuildContext context) {
 
-index=i;
+    return Scaffold(
 
-}
+      appBar: AppBar(
 
-}
+        title: Text('Flutter Combined Example'),
 
-printf("Minimum cost %d",min); printf("\n Minimum cost path "); for(i=1;i<=5;i++)
+      ),
 
-{
+      body: Center(
 
-printf("--> %d",path[index][i]); if(path[index][i]==ed)
+        child: Column(
 
-break;
+          mainAxisAlignment: MainAxisAlignment.center,
 
-}
+          children: <Widget>[
 
-}
+            // Rotating Container
+
+            Transform(
+
+              transform: Matrix4.rotationZ(0.1),
+
+              alignment: Alignment.center,
+
+              child: Container(
+
+                width: double.infinity,
+
+                height: 150.0,
+
+                color: const Color.fromARGB(255, 135, 215, 240),
+
+                margin: EdgeInsets.all(25),
+
+                padding: EdgeInsets.all(35),
+
+                alignment: Alignment.center,
+
+                child: Text(
+
+                  "Hello! I am in the container widget!!",
+
+                  style: TextStyle(fontSize: 25),
+
+                  textAlign: TextAlign.center,
+
+                ),
+
+              ),
+
+            ),
+
+            // Smaller Image with Caption
+
+            Padding(
+
+              padding: const EdgeInsets.all(8.0), // Reduced padding
+
+              child: Container(
+
+                width: 200, // Specify a smaller width
+
+                height: 100, // Specify a smaller height
+
+                child: AspectRatio(
+
+                  aspectRatio: 2 / 1, // Adjust to maintain a specific aspect ratio
+
+                  child: Image.asset(
+
+                    'assets/london.png', // Ensure this image exists
+
+                    fit: BoxFit.contain,
+
+                  ),
+
+                ),
+
+              ),
+
+            ),
+
+            Padding(
+
+              padding: const EdgeInsets.all(8.0),
+
+              child: Text(
+
+                'London, thou art the flour of cities all',
+
+                style: TextStyle(fontSize: 20.0),
+
+                textAlign: TextAlign.center,
+
+              ),
+
+            ),
+
+            // Simple Text Example
+
+            Padding(
+
+              padding: const EdgeInsets.all(16.0),
+
+            ),
+
+          ],
+
+        ),
+
+      ),
